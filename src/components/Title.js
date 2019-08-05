@@ -9,7 +9,7 @@ export class Title extends Component {
     componentDidMount() {
         axios.get('http://rekrutacja-webhosting.it.krd.pl/api/Recruitment/GetDebtsCount')
             .then(res => {
-                console.log(res);
+
                 this.setState({
                     debtsNumber: res.data,
                 })
@@ -18,17 +18,22 @@ export class Title extends Component {
 
     render() {
         return (
-            <header className="container">
-                <div className="row">
-                    <div className="col-sm">
-                        <span>Podaj numer sprawy, nazwę lub Nip dlużnika</span>
-                        <input></input>
-                        <button>Szukaj</button>
+            <header className="container-fluid">
+                <div className="row justify-content-center">
+                    <div className="col-5 titleText">
+                        Podaj numer sprawy, nazwę lub Nip dlużnika</div>
+                    <div className="col-5 redText">
+                        Całkowita ilość spraw
                     </div>
-                    <div className="col-sm">
-                        <div>
-                            {this.state.debtsNumber}
+                </div>
+                <div className="row justify-content-center">
+                    <div className="col-5">
+                        <input type="text" value={this.props.value} onChange={this.props.handleChange}></input>
+                        <button id="searchButton" onClick={this.props.handleClick}><span className="titleText">Szukaj</span></button>
+                        <div className="threeLetters">{this.props.warning}</div>
                     </div>
+                    <div className="col-5 totalNumberOfCases" >
+                        {this.state.debtsNumber}
                     </div>
                 </div>
             </header>
